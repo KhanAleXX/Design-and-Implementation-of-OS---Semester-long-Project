@@ -14,18 +14,21 @@
 
 ;5) Call a function called disk_test that will perform our read
 	call disk_test
-;	jmp $
+
+;13) Call a function called test_success that will see if the read was complete
+	call test_success
+	jmp $
 
 ;6) In disk_test - push registers onto the stack
 	disk_test:
-	pusha
+	pusha 
 
 ;7) set up the appropriate registers for the disk read operation
 	mov AH, 0x02
 	mov AL, 0x01
 	mov BX, KERNEL_ADDRESS
 	mov CH, 0x00
-	mov CL, 0x01
+	mov CL, 0x01 ;will be 0x02 in the future, because the bootloader takes up the first 512, then kernel starts with 2
 	mov DH, 0x00
 	mov DL, [BOOT_DRIVE]
 
@@ -44,10 +47,6 @@
 ;12) Pop registers off the stack and return from the function
 	popa
 	ret
-
-;13) Call a function called test_success that will see if the read was complete
-	call test_success
-;	jmp $
 
 ;14) Calculate the address where the last byte of your bootloader will be loaded into kernel memory.
 	test_success:
