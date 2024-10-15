@@ -1,4 +1,4 @@
-C_FILES=kernel.c 
+C_FILES=kernel.c console/console.c
 ASM_FILES=boot.asm kernel-entry.elf
 O_FILES=${C_FILES:.c=.o}
 
@@ -19,8 +19,8 @@ kernel.bin: kernel-entry.o kernel.o
 kernel-entry.o: kernel-entry.elf
 	nasm $< -f elf -o $@
 
-kernel.o: kernel.c
-	gcc -fno-pie -m32 -ffreestanding -c $< -o $@
+${O_FILES}:
+	gcc -fno-pie -m32 -Iinclude -ffreestanding -c ${@:.o=.c} -o $@
 
 clean:
-	$(RM) *.bin *.o
+	find . -name \*.o | xargs --no-run-if-empty rm
