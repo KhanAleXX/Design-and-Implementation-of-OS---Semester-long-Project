@@ -134,7 +134,7 @@
 	CODE_SEGMENT_INDEX equ 0x08
 	DATA_SEGMENT_INDEX equ 0x10
 
-	num_sectors db 0x09
+	num_sectors db 0x9
 
 	times 510 - ($-$$) db 0
 	dw 0xAA55

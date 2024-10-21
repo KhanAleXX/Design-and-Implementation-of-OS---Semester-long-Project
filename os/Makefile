@@ -13,14 +13,17 @@ os.bin: boot.bin kernel.bin
 boot.bin: boot.asm
 	nasm $< -f bin -o $@
 
-kernel.bin: kernel-entry.o kernel.o
+kernel.bin: kernel-entry.o $(O_FILES) 
 	ld -m elf_i386 -s -o $@ -Ttext 0x1000 $^ --oformat binary
 
 kernel-entry.o: kernel-entry.elf
 	nasm $< -f elf -o $@
 
-${O_FILES}:
-	gcc -fno-pie -m32 -Iinclude -ffreestanding -c ${@:.o=.c} -o $@
+#${O_FILES}:
+	#gcc -fno-pie -m32 -Iinclude -ffreestanding -c ${@:.o=.c} -o $@
+
+%.o: %.c
+	gcc -fno-pie -m32 -Iinclude -ffreestanding -c $< -o $@
 
 clean:
 	find . -name \*.o | xargs --no-run-if-empty rm
