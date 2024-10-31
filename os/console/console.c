@@ -1,4 +1,7 @@
 #include "../include/console.h"
+#include "../include/portmap.h"
+
+#include <stdint.h>
 
 char* const VGA_BUFFER = (char*) 0xb8000;
 const int TAB = 8;
@@ -6,6 +9,15 @@ static int term_pos = 0;
 
 static int terminal_font_color = GRAY;
 static int terminal_background_color = BLACK;
+
+static void update_cursor()
+{
+	uint16_t cursor_position = term_pos >> 1;
+	outb(0x3D4, 0x0F);
+	outb(0x3D5, (uint8_t)(cursor_position));
+	outb(0x3D4, 0x0E);
+	outb(0x3D5, (uint8_t)(cursor_position >> 8));
+}
 
 void set_terminal_font_color(VGA_Color color)
 {
@@ -31,6 +43,7 @@ void print_character_with_color(char c, VGA_Color color)
 {
 	VGA_BUFFER[term_pos++] = c;
 	VGA_BUFFER[term_pos++] = color;
+	update_cursor();
 }
 
 void clear_terminal() 
@@ -82,3 +95,4 @@ void print_line(char* str)
 {
 	print_line_with_color(str, terminal_font_color);
 }
+

@@ -1,4 +1,4 @@
-C_FILES=kernel.c console/console.c
+C_FILES=kernel.c console/console.c device/portmap/portmap.c
 ASM_FILES=boot.asm kernel-entry.elf
 O_FILES=${C_FILES:.c=.o}
 
