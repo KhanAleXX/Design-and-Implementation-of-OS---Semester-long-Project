@@ -1,5 +1,6 @@
 #include "../include/console.h"
 #include "../include/portmap.h"
+#include "../include/keyboard.h"
 
 #include <stdint.h>
 
@@ -41,9 +42,22 @@ void tab()
 
 void print_character_with_color(char c, VGA_Color color)
 {
-	VGA_BUFFER[term_pos++] = c;
-	VGA_BUFFER[term_pos++] = color;
-	update_cursor();
+	if (c == '\n')
+	{
+		new_line();
+		update_cursor();
+	}
+	else if (c == '\t')
+	{
+		tab();
+		update_cursor();
+	}
+	else 
+	{
+		VGA_BUFFER[term_pos++] = c;
+		VGA_BUFFER[term_pos++] = color;
+		update_cursor();
+	}
 }
 
 void clear_terminal() 
@@ -60,18 +74,7 @@ void print_string_with_color(char* str, VGA_Color color)
 {
 	for (int i=0; str[i] !='\0'; i++)
 	{
-		if (str[i] == '\n')
-		{
-			new_line();
-		}
-		else if (str[i] == '\t')
-		{
-			tab();
-		}
-		else 
-		{
-			print_character_with_color(str[i], color);
-		}
+		print_character_with_color(str[i], color);
 	}
 }
 

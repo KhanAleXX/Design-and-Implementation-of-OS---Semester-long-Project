@@ -1,5 +1,5 @@
-#ifndef OS_INCLUDE_CONSOLE_H
-#define OS_INCLUDE_CONSOLE_H
+#ifndef OS_INCLUDE_PORTMAP_H
+#define OS_INCLUDE_PORTMAP_H
 
 #include <stdint.h>
 
