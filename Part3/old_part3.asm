@@ -17,9 +17,6 @@
 
 ;13) Call a function called test_success that will see if the read was complete
 	call test_success
-
-; 10/29/24 revision
-	call success_message
 	jmp $
 
 ;6) In disk_test - push registers onto the stack
@@ -53,19 +50,12 @@
 
 ;14) Calculate the address where the last byte of your bootloader will be loaded into kernel memory.
 	test_success:
-
-; 10/29/24 revision
-	push AX
-
 	mov AL, 0xAA
 
 ;15) Compare the last byte of the bootloader (since you know the magic number you should know what this value is) to what lies in that calculated address.  If they are equal, print a success message. If not equal, print an error message.
 	cmp byte AL, [0x11FF]
-
-; 10/29/24 revision
+	je success_message
 	jne error_message
-	pop AX
-	ret
 
 	disk_comparison_failure:
 	mov BX, DISK_COMPARISON_ERROR
