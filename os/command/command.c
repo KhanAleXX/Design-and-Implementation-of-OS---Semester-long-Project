@@ -26,8 +26,6 @@ void parse_command(char* input) {
     }
     paramBuffer[j] = '\0';
 }
-
-// Execute command based on parsed input
 void execute_command() {
     if (strcmp(commandBuffer, "exit") == 0) {
         exit_terminal();
@@ -35,20 +33,54 @@ void execute_command() {
         display_help();
     } else if (strcmp(commandBuffer, "set-terminal-font-color") == 0) {
         if (paramBuffer[0] == '-') {
-//            if (!strcmp(paramBuffer[1], "blue"))
+            if (strcmp(paramBuffer, "-black") == 0) {
+                set_terminal_font_color(BLACK);
+            } else if (strcmp(paramBuffer, "-blue") == 0) {
                 set_terminal_font_color(BLUE);
+            } else if (strcmp(paramBuffer, "-green") == 0) {
+                set_terminal_font_color(GREEN);
+            } else if (strcmp(paramBuffer, "-cyan") == 0) {
+                set_terminal_font_color(CYAN);
+            } else if (strcmp(paramBuffer, "-red") == 0) {
+                set_terminal_font_color(RED);
+            } else if (strcmp(paramBuffer, "-brown") == 0) {
+                set_terminal_font_color(BROWN);
+            } else if (strcmp(paramBuffer, "-gray") == 0) {
+                set_terminal_font_color(GRAY);
+            } else if (strcmp(paramBuffer, "-white") == 0) {
+                set_terminal_font_color(WHITE);
+            } else {
+                print_line("Error: Unknown font color. Use '-colorname'.\\n");
+            }
         } else {
-            print_line("Error: Invalid parameter format.\n");
+            print_line("Error: Invalid parameter format. Use '-colorname'.\\n");
         }
     } else if (strcmp(commandBuffer, "set-terminal-background-color") == 0) {
         if (paramBuffer[0] == '-') {
-//	    if (!strcmp(++paramBuffer, "white"))
-	        set_terminal_background_color(RED);
+            if (strcmp(paramBuffer, "-black") == 0) {
+                set_terminal_background_color(BLACK);
+            } else if (strcmp(paramBuffer, "-blue") == 0) {
+                set_terminal_background_color(BLUE);
+            } else if (strcmp(paramBuffer, "-green") == 0) {
+                set_terminal_background_color(GREEN);
+            } else if (strcmp(paramBuffer, "-cyan") == 0) {
+                set_terminal_background_color(CYAN);
+            } else if (strcmp(paramBuffer, "-red") == 0) {
+                set_terminal_background_color(RED);
+            } else if (strcmp(paramBuffer, "-brown") == 0) {
+                set_terminal_background_color(BROWN);
+            } else if (strcmp(paramBuffer, "-gray") == 0) {
+                set_terminal_background_color(GRAY);
+            } else if (strcmp(paramBuffer, "-white") == 0) {
+                set_terminal_background_color(WHITE);
+            } else {
+                print_line("Error: Unknown background color. Use '-colorname'.\\n");
+            }
         } else {
-            print_line("Error: Invalid parameter format.\n");
+            print_line("Error: Invalid parameter format. Use '-colorname'.\\n");
         }
     } else {
-        print_line("Error: Unknown command. Type 'help' for commands.\n");
+        print_line("Error: Unknown command. Type 'help' for commands.\\n");
     }
 }
 
