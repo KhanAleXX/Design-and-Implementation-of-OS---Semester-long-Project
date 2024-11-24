@@ -55,7 +55,7 @@ void print_character_with_color(char c, VGA_Color color)
 	else 
 	{
 		VGA_BUFFER[term_pos++] = c;
-		VGA_BUFFER[term_pos++] = color;
+		VGA_BUFFER[term_pos++] = (terminal_background_color << 4) | color;
 		update_cursor();
 	}
 }
@@ -97,5 +97,21 @@ void print_string(char* str)
 void print_line(char* str)
 {
 	print_line_with_color(str, terminal_font_color);
+}
+
+void print_prompt() 
+{
+	set_terminal_font_color(GRAY);
+	set_terminal_background_color(BLACK);
+	print_string("~> ");
+}
+
+// Display help message
+void display_help() {
+	print_line("Commands:\n");
+	print_line("  exit - Exit terminal.\n");
+	print_line("  help - List commands.\n");
+	print_line("  set-terminal-font-color -COLOR - Change font color.\n");
+	print_line("  set-terminal-background-color -COLOR - Change background color.\n");
 }
 
