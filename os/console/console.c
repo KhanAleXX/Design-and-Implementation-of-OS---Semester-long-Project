@@ -106,12 +106,11 @@ void print_prompt()
 	print_string("~> ");
 }
 
-// Display help message
 void display_help() {
 	print_line("Commands:\n");
-	print_line("  exit - Exit terminal.\n");
-	print_line("  help - List commands.\n");
-	print_line("  set-terminal-font-color -COLOR - Change font color.\n");
-	print_line("  set-terminal-background-color -COLOR - Change background color.\n");
+	print_line("\texit - Exit terminal.\n");
+	print_line("\thelp - List commands.\n");
+	print_line("\tset-terminal-font-color -COLOR\n");
+	print_line("\tset-terminal-background-color -COLOR\n");
 }
 

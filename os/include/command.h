@@ -3,4 +3,6 @@
 
 void parse_and_execute_command(char* input);
 
+void get_input();
+
 #endif

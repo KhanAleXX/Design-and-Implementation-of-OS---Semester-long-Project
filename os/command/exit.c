@@ -3,5 +3,5 @@
 
 void exit_terminal() {
     print_line("Exiting terminal...");
-    __asm__("hlt");  // Halts CPU
+    __asm__("hlt");  
 }
